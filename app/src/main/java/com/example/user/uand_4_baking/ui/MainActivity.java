@@ -1,10 +1,13 @@
 package com.example.user.uand_4_baking.ui;
 
 import android.databinding.DataBindingUtil;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Display;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -21,24 +24,29 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements
+    RecipeAdapter.RecipeCardClickListener
+    {
 
     private static String TAG = MainActivity.class.getSimpleName();
 
-    private ActivityMainBinding recipeBinding;
+    private RelativeLayout mErrorLayout;
 
-    RelativeLayout errorRelativeLayout;
+    private RecyclerView mRecyclerView;
 
-    RecyclerView recyclerView;
+    private RecipeAdapter mRecipeAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        ActivityMainBinding recipeBinding;
+
         recipeBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
-        errorRelativeLayout = recipeBinding.networkErrorLayout.rlErrorLayout;
+        mErrorLayout = recipeBinding.networkErrorLayout.rlErrorLayout;
 
-        recyclerView = recipeBinding.rvRecipes;
+        mRecyclerView = recipeBinding.rvRecipes;
 
         recipeBinding.networkErrorLayout.tvRefresh.setOnClickListener(new View.OnClickListener() {
                                                                         @Override
@@ -47,10 +55,38 @@ public class MainActivity extends AppCompatActivity {
                                                                         }
                                                                     });
 
+        initializeRecyclerView();
+
         loadRecipes();
     }
 
-    public void loadRecipes() {
+    private void initializeRecyclerView() {
+
+        int gridSpanCount = getResources().getInteger(R.integer.grid_span_count);
+
+        GridLayoutManager layoutManager
+                = new GridLayoutManager(this, gridSpanCount);
+        mRecyclerView.setLayoutManager(layoutManager);
+
+        mRecyclerView.setHasFixedSize(true);
+
+        mRecipeAdapter = new RecipeAdapter(this, this);
+        mRecyclerView.setAdapter(mRecipeAdapter);
+    }
+
+    /**
+     * Called when a recipe card is clicked. It creates an explicit intent to the DetailActivity class
+     *
+     * @param clickedRecipeObject this object is passed from the ViewHolder It needs to be a Parcelable class
+     */
+    @Override
+    public void onRecipeClicked(Recipe clickedRecipeObject) {
+        //Intent intent = new Intent(this, DetailActivity.class);
+        //intent.putExtra(CLICKED_MOVIE_OBJECT, clickedMovieObject);
+        //startActivity(intent);
+    }
+
+    private void loadRecipes() {
 
         //Followed retrofit code from
         //https://medium.com/cr8resume/make-your-hand-dirty-with-retrofit-2-a-type-safe-http-client-for-android-and-java-c546f88b3a51
@@ -67,15 +103,13 @@ public class MainActivity extends AppCompatActivity {
 
             call.enqueue(new Callback<List<Recipe>>() {
                 @Override
-                public void onResponse(Call<List<Recipe>> call, Response<List<Recipe>> response) {
+                public void onResponse(@NonNull Call<List<Recipe>> call, @NonNull Response<List<Recipe>> response) {
                     List<Recipe> recipeList = response.body();
-                    for (Recipe recipe : recipeList) {
-                        Log.d(TAG, recipe.toString());
-                    }
+                    mRecipeAdapter.setRecipeData(recipeList);
                 }
 
                 @Override
-                public void onFailure(Call<List<Recipe>> call, Throwable t) {
+                public void onFailure(@NonNull Call<List<Recipe>> call, @NonNull Throwable t) {
                     Log.e(TAG, t.getMessage());
                     showErrorMessage();
                 }
@@ -86,13 +120,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void showRecipes() {
-        recyclerView.setVisibility(View.VISIBLE);
-        errorRelativeLayout.setVisibility(View.INVISIBLE);
+        mRecyclerView.setVisibility(View.VISIBLE);
+        mErrorLayout.setVisibility(View.INVISIBLE);
     }
 
     private void showNetworkErrorMessage() {
-        recyclerView.setVisibility(View.INVISIBLE);
-        errorRelativeLayout.setVisibility(View.VISIBLE);
+        mRecyclerView.setVisibility(View.INVISIBLE);
+        mErrorLayout.setVisibility(View.VISIBLE);
     }
 
     private void showErrorMessage() {

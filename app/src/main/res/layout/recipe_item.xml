@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin"
+        android:foreground="?android:attr/selectableItemBackground">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/iv_recipe_image"
+                android:layout_width="@dimen/recipe_image_size"
+                android:layout_height="@dimen/recipe_image_size"
+                android:adjustViewBounds="true"
+                android:layout_marginLeft="@dimen/margin"
+                android:layout_marginStart="@dimen/margin"
+                android:layout_marginTop="@dimen/margin"
+                android:layout_marginBottom="@dimen/margin"
+                android:contentDescription="@string/recipe_content_description"
+                android:background="@drawable/ic_recipe" />
+
+            <TextView
+                android:id="@+id/tv_recipe_name"
+                style="@style/TextAppearance.AppCompat.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/recipe_left_margin"
+                android:layout_marginStart="@dimen/recipe_left_margin"
+                android:layout_marginTop="@dimen/recipe_name_top_margin"
+                android:layout_toRightOf="@+id/iv_recipe_image"
+                android:layout_toEndOf="@+id/iv_recipe_image" />
+
+            <TextView
+                android:id="@+id/tv_servings_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/recipe_left_margin"
+                android:layout_marginStart="@dimen/recipe_left_margin"
+                android:layout_marginTop="@dimen/margin"
+                android:layout_below="@+id/tv_recipe_name"
+                android:layout_toRightOf="@+id/iv_recipe_image"
+                android:layout_toEndOf="@+id/iv_recipe_image"
+                android:text="@string/servings_label" />
+
+            <TextView
+                android:id="@+id/tv_recipe_servings"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin"
+                android:layout_marginStart="@dimen/margin"
+                android:layout_marginTop="@dimen/margin"
+                android:layout_below="@+id/tv_recipe_name"
+                android:layout_toRightOf="@+id/tv_servings_label"
+                android:layout_toEndOf="@+id/tv_servings_label" />
+
+            <TextView
+                android:id="@+id/tv_recipe_ingredient_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/recipe_left_margin"
+                android:layout_marginStart="@dimen/recipe_left_margin"
+                android:layout_marginTop="@dimen/margin"
+                android:layout_below="@+id/tv_servings_label"
+                android:layout_toRightOf="@+id/iv_recipe_image"
+                android:layout_toEndOf="@+id/iv_recipe_image" />
+
+            <TextView
+                android:id="@+id/tv_recipe_ingredients_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin"
+                android:layout_marginStart="@dimen/margin"
+                android:layout_marginTop="@dimen/margin"
+                android:layout_below="@+id/tv_servings_label"
+                android:layout_toRightOf="@+id/tv_recipe_ingredient_count"
+                android:layout_toEndOf="@+id/tv_recipe_ingredient_count"
+                android:text="@string/ingredients_label" />
+
+            <TextView
+                android:id="@+id/tv_recipe_step_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin"
+                android:layout_marginStart="@dimen/margin"
+                android:layout_marginTop="@dimen/margin"
+                android:layout_below="@+id/tv_servings_label"
+                android:layout_toRightOf="@+id/tv_recipe_ingredients_label"
+                android:layout_toEndOf="@+id/tv_recipe_ingredients_label" />
+
+            <TextView
+                android:id="@+id/tv_recipe_steps_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin"
+                android:layout_marginStart="@dimen/margin"
+                android:layout_marginTop="@dimen/margin"
+                android:layout_below="@+id/tv_servings_label"
+                android:layout_toRightOf="@+id/tv_recipe_step_count"
+                android:layout_toEndOf="@+id/tv_recipe_step_count"
+                android:text="@string/steps_label" />
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+</layout>

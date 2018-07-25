@@ -4,4 +4,10 @@
 
     <dimen name="network_error_margin">10dp</dimen>
 
+    <dimen name="recipe_image_size">96dp</dimen>
+
+    <dimen name="recipe_name_top_margin">16dp</dimen>
+
+    <dimen name="recipe_left_margin">8dp</dimen>
+
 </resources>
