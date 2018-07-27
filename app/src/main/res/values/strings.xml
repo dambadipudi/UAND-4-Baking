@@ -13,7 +13,11 @@
 
     <string name="ingredients_label">Ingredients, </string>
 
+    <string name="detail_ingredients_label">Ingredients:</string>
+
     <string name="steps_label">Steps</string>
+
+    <string name="detail_steps_label">Steps:</string>
 
 
 </resources>
