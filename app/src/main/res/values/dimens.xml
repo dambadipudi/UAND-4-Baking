@@ -6,8 +6,16 @@
 
     <dimen name="recipe_image_size">96dp</dimen>
 
+    <dimen name="step_image_size">48dp</dimen>
+
     <dimen name="recipe_name_top_margin">16dp</dimen>
 
     <dimen name="recipe_left_margin">8dp</dimen>
+
+    <dimen name="ingredients_left_margin">16dp</dimen>
+
+    <dimen name="steps_left_margin">@dimen/ingredients_left_margin</dimen>
+
+    <dimen name="empty">0dp</dimen>
 
 </resources>

@@ -1,5 +1,6 @@
 package com.example.user.uand_4_baking.ui;
 
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -7,7 +8,6 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.Display;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -29,6 +29,8 @@ public class MainActivity extends AppCompatActivity implements
     {
 
     private static String TAG = MainActivity.class.getSimpleName();
+
+    private static String CLICKED_RECIPE_OBJECT = "RECIPE_DETAILS";
 
     private RelativeLayout mErrorLayout;
 
@@ -81,9 +83,9 @@ public class MainActivity extends AppCompatActivity implements
      */
     @Override
     public void onRecipeClicked(Recipe clickedRecipeObject) {
-        //Intent intent = new Intent(this, DetailActivity.class);
-        //intent.putExtra(CLICKED_MOVIE_OBJECT, clickedMovieObject);
-        //startActivity(intent);
+        Intent intent = new Intent(this, RecipeDetailActivity.class);
+        intent.putExtra(CLICKED_RECIPE_OBJECT, clickedRecipeObject);
+        startActivity(intent);
     }
 
     private void loadRecipes() {
