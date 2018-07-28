@@ -24,11 +24,13 @@
 
         <TextView
             android:id="@+id/tv_step_title"
+            style="@style/TextAppearance.AppCompat.Medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/recipe_left_margin"
             android:layout_marginStart="@dimen/recipe_left_margin"
             android:layout_marginTop="@dimen/recipe_name_top_margin"
+            android:layout_marginBottom="@dimen/recipe_name_bottom_margin"
             android:layout_toRightOf="@+id/iv_step_image"
             android:layout_toEndOf="@+id/iv_step_image" />
 
