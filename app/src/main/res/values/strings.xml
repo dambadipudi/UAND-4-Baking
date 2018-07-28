@@ -19,5 +19,10 @@
 
     <string name="detail_steps_label">Steps:</string>
 
+    <string name="step_description_label">Description</string>
+
+    <string name="next_button">Next -></string>
+
+    <string name="previous_button">&lt;- Previous</string>
 
 </resources>

@@ -10,6 +10,8 @@
 
     <dimen name="recipe_name_top_margin">16dp</dimen>
 
+    <dimen name="recipe_name_bottom_margin">8dp</dimen>
+
     <dimen name="recipe_left_margin">8dp</dimen>
 
     <dimen name="ingredients_left_margin">16dp</dimen>
@@ -17,5 +19,7 @@
     <dimen name="steps_left_margin">@dimen/ingredients_left_margin</dimen>
 
     <dimen name="empty">0dp</dimen>
+
+    <dimen name="ingredient_name_constraint_width_percentage">0.75</dimen>
 
 </resources>
