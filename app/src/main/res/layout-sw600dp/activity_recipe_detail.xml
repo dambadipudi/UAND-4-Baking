@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Display the steps fragment and the step detail fragment in a horizontal linear layout -->
+
+<LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_step_detail"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="horizontal"  >
+
+
+    <fragment
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/recipe_detail_fragment"
+        android:name="com.example.user.uand_4_baking.ui.RecipeDetailFragment"
+        android:layout_width="@dimen/empty"
+        android:layout_height="match_parent"
+        android:layout_weight="1" />
+
+    <View   android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@android:color/darker_gray" />
+
+    <FrameLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/step_detail_container"
+        android:layout_width="@dimen/empty"
+        android:layout_height="match_parent"
+        android:layout_weight="1" />
+
+</LinearLayout>

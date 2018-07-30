@@ -2,6 +2,7 @@ package com.example.user.uand_4_baking.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
@@ -10,6 +11,7 @@ import com.example.user.uand_4_baking.model.Recipe;
 import com.example.user.uand_4_baking.model.Step;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class RecipeDetailActivity extends AppCompatActivity implements RecipeDetailFragment.OnStepClickListener{
 
@@ -20,6 +22,10 @@ public class RecipeDetailActivity extends AppCompatActivity implements RecipeDet
     private static String CLICKED_STEP_POSITION = "STEP_POSITION";
 
     private RecipeDetailFragment detailFrag;
+
+    private boolean mTwoPane;
+
+    StepDetailFragment mCurrentStepFragment;
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -34,16 +40,42 @@ public class RecipeDetailActivity extends AppCompatActivity implements RecipeDet
                 detailFrag.setRecipeData(recipe);
 
                 setTitle(recipe.getName());
+
+                if(findViewById(R.id.ll_step_detail) != null) {
+                    mTwoPane = true;
+
+                    mCurrentStepFragment = new StepDetailFragment();
+
+                    int position = 0;
+
+                    List<Step> stepList = recipe.getSteps();
+
+                    mCurrentStepFragment.setStepData(stepList, position);
+
+                    FragmentManager fragmentManager = getSupportFragmentManager();
+
+                    fragmentManager.beginTransaction()
+                            .add(R.id.step_detail_container, mCurrentStepFragment)
+                            .commit();
+                } else {
+                    mTwoPane = false;
+                }
             }
+
+
         }
 
     @Override
     public void onStepClicked(ArrayList<Step> stepList, int position) {
-        Intent intent = new Intent(this, StepDetailActivity.class);
-        Log.d("RECIPE_DETAIL_ACTIVITY",stepList.toString());
-        intent.putParcelableArrayListExtra(CLICKED_STEP_LIST, stepList);
-        Log.d("RECIPE_DETAIL_ACTIVITY",""+position);
-        intent.putExtra(CLICKED_STEP_POSITION, position);
-        startActivity(intent);
+        if(mTwoPane) {
+            mCurrentStepFragment.updatePosition(position);
+        } else {
+            Intent intent = new Intent(this, StepDetailActivity.class);
+            intent.putParcelableArrayListExtra(CLICKED_STEP_LIST, stepList);
+            intent.putExtra(CLICKED_STEP_POSITION, position);
+            startActivity(intent);
+        }
+
+
     }
 }

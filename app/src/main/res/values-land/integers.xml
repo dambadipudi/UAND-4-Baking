@@ -3,4 +3,10 @@
 
     <integer name="grid_span_count">2</integer>
 
+    <integer name="fragment_step_weight_sum">10</integer>
+
+    <integer name="fragment_step_detail_weight">8</integer>
+
+    <integer name="fragment_step_button_weight">2</integer>
+
 </resources>
