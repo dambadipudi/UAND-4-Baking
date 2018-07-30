@@ -4,13 +4,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 
 import com.example.user.uand_4_baking.R;
 import com.example.user.uand_4_baking.model.Step;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class StepDetailActivity extends AppCompatActivity {
 
@@ -28,12 +26,10 @@ public class StepDetailActivity extends AppCompatActivity {
         if (intent.hasExtra(CLICKED_STEP_LIST)) {
 
             ArrayList<Step> stepList = intent.getParcelableArrayListExtra(CLICKED_STEP_LIST);
-Log.d("STEP_DETAIL_ACTIVITY",stepList.toString());
             int position = 0;
 
             if(intent.hasExtra(CLICKED_STEP_POSITION)) {
                 position = intent.getIntExtra(CLICKED_STEP_POSITION, 0);
-Log.d("STEP_DETAIL_ACTIVITY",""+position);
             }
 
             StepDetailFragment currentStepFragment = new StepDetailFragment();

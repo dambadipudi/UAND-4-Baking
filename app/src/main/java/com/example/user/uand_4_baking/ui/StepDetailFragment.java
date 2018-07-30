@@ -43,19 +43,14 @@ public class StepDetailFragment extends Fragment {
         updateStepData();
 
         nextButton = rootView.findViewById(R.id.next_button);
-        if (mListIndex == mStepList.size() - 1) {
+        if (mStepList!= null && mListIndex == mStepList.size() - 1) {
             nextButton.setEnabled(false);
         }
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(mListIndex < mStepList.size() - 1) {
-                    mListIndex++;
-                    updateStepData();
-                    previousButton.setEnabled(true);
-                }
-                if (mListIndex == mStepList.size() - 1) {
-                    v.setEnabled(false);
+                if(mStepList!= null && mListIndex < mStepList.size() - 1) {
+                    updatePosition(mListIndex + 1);
                 }
             }
         });
@@ -68,12 +63,7 @@ public class StepDetailFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if(mListIndex > 0) {
-                    mListIndex--;
-                    updateStepData();
-                    nextButton.setEnabled(true);
-                }
-                if(mListIndex == 0) {
-                    v.setEnabled(false);
+                   updatePosition(mListIndex - 1);
                 }
             }
         });
@@ -86,6 +76,18 @@ public class StepDetailFragment extends Fragment {
         mListIndex = position;
     }
 
+    public void updatePosition(int position) {
+        mListIndex = position;
+        previousButton.setEnabled(true);
+        nextButton.setEnabled(true);
+        if(mListIndex == 0) {
+            previousButton.setEnabled(false);
+        } else if (mListIndex == mStepList.size() - 1) {
+            nextButton.setEnabled(false);
+        }
+        updateStepData();
+    }
+
     private void updateStepData() {
         if(videoURLTextView != null && mStepList != null && mStepList.get(mListIndex) != null) {
             videoURLTextView.setText(mStepList.get(mListIndex).getVideoURL());
@@ -93,7 +95,9 @@ public class StepDetailFragment extends Fragment {
         if(descriptionTextView != null && mStepList != null && mStepList.get(mListIndex) != null) {
             descriptionTextView.setText(mStepList.get(mListIndex).getDescription());
         }
-        getActivity().setTitle(mStepList.get(mListIndex).getShortDescription());
+        if(getActivity() != null && mStepList != null && mStepList.get(mListIndex) != null) {
+            getActivity().setTitle(mStepList.get(mListIndex).getShortDescription());
+        }
     }
 
 }
