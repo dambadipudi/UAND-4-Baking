@@ -22,4 +22,6 @@
 
     <dimen name="ingredient_name_constraint_width_percentage">0.75</dimen>
 
+    <dimen name="video_height">200dp</dimen>
+
 </resources>
