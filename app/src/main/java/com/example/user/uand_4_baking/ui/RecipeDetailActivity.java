@@ -27,6 +27,8 @@ public class RecipeDetailActivity extends AppCompatActivity implements RecipeDet
 
     StepDetailFragment mCurrentStepFragment;
 
+    private static String CURRENT_STEP_POSITION = "CURRENT_STEP_POSITION";
+
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
@@ -47,6 +49,10 @@ public class RecipeDetailActivity extends AppCompatActivity implements RecipeDet
                     mCurrentStepFragment = new StepDetailFragment();
 
                     int position = 0;
+
+                    if(savedInstanceState != null && savedInstanceState.containsKey(CURRENT_STEP_POSITION)){
+                        position = savedInstanceState.getInt(CURRENT_STEP_POSITION);
+                    }
 
                     List<Step> stepList = recipe.getSteps();
 
@@ -76,6 +82,14 @@ public class RecipeDetailActivity extends AppCompatActivity implements RecipeDet
             startActivity(intent);
         }
 
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if(mTwoPane) {
+            outState.putInt(CURRENT_STEP_POSITION, mCurrentStepFragment.getPosition());
+        }
 
     }
 }

@@ -100,4 +100,8 @@ public class StepDetailFragment extends Fragment {
         }
     }
 
+    public int getPosition() {
+        return mListIndex;
+    }
+
 }
