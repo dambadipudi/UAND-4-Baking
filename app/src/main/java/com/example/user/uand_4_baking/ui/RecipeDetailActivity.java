@@ -16,6 +16,8 @@ public class RecipeDetailActivity extends AppCompatActivity implements RecipeDet
 
     private boolean mTwoPane;
 
+    public String mRecipeName = "";
+
     StepDetailFragment mCurrentStepFragment;
 
         @Override
@@ -31,7 +33,8 @@ public class RecipeDetailActivity extends AppCompatActivity implements RecipeDet
                 RecipeDetailFragment detailFrag = (RecipeDetailFragment) getSupportFragmentManager().findFragmentById(R.id.recipe_detail_fragment);
                 detailFrag.setRecipeData(recipe);
 
-                setTitle(recipe.getName());
+                mRecipeName = recipe.getName();
+                setTitle(mRecipeName);
 
                 if(findViewById(R.id.ll_step_detail) != null) {
                     mTwoPane = true;
@@ -61,6 +64,7 @@ public class RecipeDetailActivity extends AppCompatActivity implements RecipeDet
     @Override
     public void onStepClicked(ArrayList<Step> stepList, int position) {
         if(mTwoPane) {
+            mCurrentStepFragment.resetPlayer();
             mCurrentStepFragment.updatePosition(position);
         } else {
             Intent intent = new Intent(this, StepDetailActivity.class);
@@ -68,6 +72,8 @@ public class RecipeDetailActivity extends AppCompatActivity implements RecipeDet
             intent.putParcelableArrayListExtra(CLICKED_STEP_LIST, stepList);
             String CLICKED_STEP_POSITION = "STEP_POSITION";
             intent.putExtra(CLICKED_STEP_POSITION, position);
+            String RECIPE_TITLE = "RECIPE_NAME";
+            intent.putExtra(RECIPE_TITLE, mRecipeName);
             startActivity(intent);
         }
 

@@ -100,6 +100,8 @@ public class Recipe implements Parcelable {
         return 0;
     }
 
+    public Recipe() {}
+
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(id);
