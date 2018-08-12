@@ -21,6 +21,11 @@ public class StepDetailActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
 
+        String RECIPE_NAME = "RECIPE_NAME";
+        if(intent.hasExtra(RECIPE_NAME)) {
+            setTitle(intent.getStringExtra(RECIPE_NAME));
+        }
+
         String CLICKED_STEP_LIST = "STEP_LIST";
         if (intent.hasExtra(CLICKED_STEP_LIST)) {
 

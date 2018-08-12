@@ -29,6 +29,8 @@ import java.util.List;
 
 public class StepDetailFragment extends Fragment {
 
+    private TextView titleTextView;
+
     private TextView descriptionTextView;
 
     private List<Step> mStepList;
@@ -67,6 +69,8 @@ public class StepDetailFragment extends Fragment {
         initializePlayer();
 
         descriptionTextView = rootView.findViewById(R.id.tv_step_description);
+
+        titleTextView = rootView.findViewById(R.id.tv_step_title);
 
         updateStepData();
 
@@ -140,9 +144,11 @@ public class StepDetailFragment extends Fragment {
         if(descriptionTextView != null && mStepList != null && mStepList.get(mListIndex) != null) {
             descriptionTextView.setText(mStepList.get(mListIndex).getDescription());
         }
-        if(getActivity() != null && mStepList != null && mStepList.get(mListIndex) != null) {
-            getActivity().setTitle(mStepList.get(mListIndex).getShortDescription());
+
+        if(titleTextView != null && mStepList != null && mStepList.get(mListIndex) != null) {
+            titleTextView.setText(mStepList.get(mListIndex).getShortDescription());
         }
+
     }
 
     public int getPosition() {
