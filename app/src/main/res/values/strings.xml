@@ -25,4 +25,9 @@
 
     <string name="previous_button">&lt;- Previous</string>
 
+    <string name="add_widget">Add widget</string>
+
+    <string name="widget_label">Recently Viewed Recipe</string>
+
+    <string name="widget_ingredient_label">Ingredients:</string>
 </resources>
