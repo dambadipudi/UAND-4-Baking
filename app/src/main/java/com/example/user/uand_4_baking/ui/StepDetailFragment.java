@@ -54,6 +54,10 @@ public class StepDetailFragment extends Fragment {
 
     private static final String CURRENT_PLAYER_STATUS = "CURRENT_PLAYER_STATUS";
 
+    private static final String CURRENT_STEP_LIST = "CURRENT_STEP_LIST";
+
+    private static final String CURRENT_STEP_POSITION = "CURRENT_STEP_POSITION";
+
     // Mandatory empty constructor
     public StepDetailFragment() {
     }
@@ -191,8 +195,8 @@ public class StepDetailFragment extends Fragment {
         super.onSaveInstanceState(outState);
         outState.putLong(CURRENT_PLAYER_POSITION, mExoPlayer.getCurrentPosition());
         outState.putBoolean(CURRENT_PLAYER_STATUS, mExoPlayer.getPlayWhenReady());
-        outState.putParcelableArrayList("Step_List", (ArrayList) mStepList);
-        outState.putInt("POSITION", mListIndex);
+        outState.putParcelableArrayList(CURRENT_STEP_LIST, (ArrayList) mStepList);
+        outState.putInt(CURRENT_STEP_POSITION, mListIndex);
     }
 
     @Override
@@ -202,9 +206,9 @@ public class StepDetailFragment extends Fragment {
             mPlayerPosition = savedInstanceState.getLong(CURRENT_PLAYER_POSITION);
             mPlayerStatus = savedInstanceState.getBoolean(CURRENT_PLAYER_STATUS);
             if(mStepList == null) {
-                mStepList  = savedInstanceState.getParcelableArrayList("Step_List");
+                mStepList  = savedInstanceState.getParcelableArrayList(CURRENT_STEP_LIST);
             }
-            mListIndex = savedInstanceState.getInt("POSITION");
+            mListIndex = savedInstanceState.getInt(CURRENT_STEP_POSITION);
             updateStepData();
         }
     }
