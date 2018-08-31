@@ -25,6 +25,7 @@ import com.google.android.exoplayer2.upstream.DataSource;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class StepDetailFragment extends Fragment {
@@ -190,6 +191,8 @@ public class StepDetailFragment extends Fragment {
         super.onSaveInstanceState(outState);
         outState.putLong(CURRENT_PLAYER_POSITION, mExoPlayer.getCurrentPosition());
         outState.putBoolean(CURRENT_PLAYER_STATUS, mExoPlayer.getPlayWhenReady());
+        outState.putParcelableArrayList("Step_List", (ArrayList) mStepList);
+        outState.putInt("POSITION", mListIndex);
     }
 
     @Override
@@ -198,6 +201,10 @@ public class StepDetailFragment extends Fragment {
         if(savedInstanceState != null) {
             mPlayerPosition = savedInstanceState.getLong(CURRENT_PLAYER_POSITION);
             mPlayerStatus = savedInstanceState.getBoolean(CURRENT_PLAYER_STATUS);
+            if(mStepList == null) {
+                mStepList  = savedInstanceState.getParcelableArrayList("Step_List");
+            }
+            mListIndex = savedInstanceState.getInt("POSITION");
             updateStepData();
         }
     }
