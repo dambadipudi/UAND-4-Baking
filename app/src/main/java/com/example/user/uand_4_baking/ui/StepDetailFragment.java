@@ -71,13 +71,9 @@ public class StepDetailFragment extends Fragment {
 
         setRetainInstance(true);
 
-        initializePlayer();
-
         descriptionTextView = rootView.findViewById(R.id.tv_step_description);
 
         titleTextView = rootView.findViewById(R.id.tv_step_title);
-
-        updateStepData();
 
         nextButton = rootView.findViewById(R.id.next_button);
         if (mStepList!= null && mListIndex == mStepList.size() - 1) {
@@ -185,16 +181,50 @@ public class StepDetailFragment extends Fragment {
     }
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        releasePlayer();
+    public void onStart() {
+        super.onStart();
+        if (Util.SDK_INT > 23) {
+            initializePlayer();
+            updateStepData();
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (Util.SDK_INT <= 23) {
+            initializePlayer();
+            updateStepData();
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (Util.SDK_INT <= 23) {
+            releasePlayer();
+        }
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (Util.SDK_INT > 23) {
+            releasePlayer();
+        }
     }
 
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putLong(CURRENT_PLAYER_POSITION, mExoPlayer.getCurrentPosition());
-        outState.putBoolean(CURRENT_PLAYER_STATUS, mExoPlayer.getPlayWhenReady());
+        if(mExoPlayer != null) {
+            mPlayerPosition = mExoPlayer.getCurrentPosition();
+            mPlayerStatus = mExoPlayer.getPlayWhenReady();
+        }
+
+        outState.putLong(CURRENT_PLAYER_POSITION, mPlayerPosition);
+        outState.putBoolean(CURRENT_PLAYER_STATUS, mPlayerStatus);
+
         outState.putParcelableArrayList(CURRENT_STEP_LIST, (ArrayList) mStepList);
         outState.putInt(CURRENT_STEP_POSITION, mListIndex);
     }
